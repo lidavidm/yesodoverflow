@@ -1,8 +1,14 @@
   haskell:
     type: custom
-    buildscript: yesodoverflow/dotcloud2
+    buildscript: yesodoverflow/dotcloud
     ports:
       www: http
+    systempackages:
+      - cabal-install
+      - happy
+      - alex
+      - ghc
+      - git
     approot: yesodoverflow
   data:
     type: postgresql
