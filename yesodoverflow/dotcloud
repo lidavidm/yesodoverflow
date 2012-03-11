@@ -1,0 +1,24 @@
+#!/bin/bash
+cd
+echo "Installing yesod."
+cabal update
+cabal install yesod cabal-dev
+export PATH=$HOME/.cabal/bin:$PATH
+git clone git://github.com/lidavidm/yesodoverflow.git
+cd yesodoverflow/yesodoverflow
+cabal-dev install
+cabal-dev clean
+cabal-dev configure
+cabal-dev build
+cd ..
+echo "Installing dotCloud scaffolding."
+cat >run <<EOF
+#!/bin/bash
+cd \$HOME/yesodoverflow/yesodoverflow/
+exec ./dist/build/yesodoverflow/yesodoverflow Production --port \$PORT_WWW
+EOF
+    chmod +x run
+fi
+cat >profile <<EOF
+export PATH=\$HOME/.cabal/bin:\$PATH
+EOF
