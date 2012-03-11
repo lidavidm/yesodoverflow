@@ -4,7 +4,10 @@
     ports:
       www: http
     systempackages:
-      - haskell-platform
+      - cabal-install
+      - happy
+      - alex
+      - ghc
       - git
     approot: yesodoverflow
   data:
