@@ -1,0 +1,6 @@
+cat >run <<EOF
+#!/bin/bash
+cd \$HOME/yesodoverflow/yesodoverflow/
+exec ./dist/build/yesodoverflow/yesodoverflow Production --port \$PORT_WWW
+EOF
+chmod +x run

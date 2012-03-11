@@ -1,6 +1,6 @@
   haskell:
     type: custom
-    buildscript: yesodoverflow/dotcloud
+    buildscript: yesodoverflow/dotcloud2
     ports:
       www: http
     systempackages:
