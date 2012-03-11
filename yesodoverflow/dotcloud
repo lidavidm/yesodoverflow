@@ -3,9 +3,9 @@ cd
 echo "Installing yesod."
 cabal update
 cabal install cabal-install
-cabal install cabal-dev
 export PATH=$HOME/.cabal/bin:$PATH
-cd yesodoverflow/yesodoverflow
+cabal install cabal-dev
+cd yesodoverflow
 cabal-dev install
 cabal-dev clean
 cabal-dev configure
@@ -14,7 +14,7 @@ cd ..
 echo "Installing dotCloud scaffolding."
 cat >run <<EOF
 #!/bin/bash
-cd \$HOME/yesodoverflow/yesodoverflow/
+cd \$HOME/yesodoverflow/
 exec ./dist/build/yesodoverflow/yesodoverflow Production --port \$PORT_WWW
 EOF
     chmod +x run

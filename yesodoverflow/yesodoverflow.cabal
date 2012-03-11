@@ -39,7 +39,7 @@ library
                      Handler.User
                      Handler.Actions
 
-    ghc-options:   -Wall -threaded -O0
+    ghc-options:   -Wall -threaded -O0 -static -optl-static
     cpp-options:   -DDEVELOPMENT
 
     extensions: TemplateHaskell
@@ -61,9 +61,9 @@ executable         yesodoverflow
 
     if flag(dev)
         cpp-options:   -DDEVELOPMENT
-        ghc-options:   -Wall -threaded -O0
+        ghc-options:   -Wall -threaded -O0 -static -optl-static
     else
-        ghc-options:   -Wall -threaded -O2
+        ghc-options:   -Wall -threaded -O2 -static -optl-static
 
     main-is:       main.hs
 
