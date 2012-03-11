@@ -1,20 +1,24 @@
 Default: &defaults
-  database: yesodoverflow.sqlite3
+  user: yesodoverflow
+  password: yesodoverflow
+  host: localhost
+  port: 5432
+  database: yesodoverflow
   poolsize: 10
 
 Development:
   <<: *defaults
 
 Test:
-  database: yesodoverflow_test.sqlite3
+  database: yesodoverflow_test
   <<: *defaults
 
 Staging:
-  database: yesodoverflow_staging.sqlite3
+  database: yesodoverflow_staging
   poolsize: 100
   <<: *defaults
 
 Production:
-  database: yesodoverflow_production.sqlite3
+  database: yesodoverflow_production
   poolsize: 100
   <<: *defaults

@@ -17,6 +17,7 @@ import Network.Wai.Middleware.RequestLogger (logCallbackDev)
 #else
 import Yesod.Logger (Logger, logBS, toProduction)
 import Network.Wai.Middleware.RequestLogger (logCallback)
+import qualified Web.Heroku
 #endif
 import qualified Database.Persist.Store
 import Database.Persist.GenericSql (runMigration)
@@ -67,3 +68,39 @@ getApplicationDev =
     loader = loadConfig (configSettings Development)
         { csParseExtra = parseExtra
         }
+
+canonicalizeKey :: (Text, val) -> (Text, val)
+canonicalizeKey ("dbname", val) = ("database", val)
+canonicalizeKey pair = pair
+
+toMapping :: [(key, val)] -> DO.Object key val
+toMapping = DO.Mapping . map (\(key, val) -> (key, DO.Scalar val))
+
+combineMappings :: DO.Object key val -> DO.Object key val -> DO.Object key val
+combineMappings (DO.Mapping m1) (DO.Mapping m2) = DO.Mapping $ m1 ++ m2
+combineMappings _ _ = error "Data.Object is not a Mapping."
+
+loadHerokuConfig :: DO.TextObject -> IO Settings.PersistConfig
+loadHerokuConfig ymlenv = do
+  #if DEVELOPMENT
+      let urlMap = DO.Mapping []
+  #else
+      urlMap <- Web.Heroku.dbConnParams >>= return . toMapping . map canonicalizeKey
+  #endif
+      either error return $ Database.Persist.Base.loadConfig (combineMappings urlMap ymlenv)
+
+
+withYesodHeroku :: AppConfig DefaultEnv () -> Logger -> (Application -> IO ()) -> IO ()
+withYesodHeroku conf logger f = do
+s <- staticSite
+dbconf <- withYamlEnvironment "config/postgresql.yml" (appEnv conf) loadHerokuConfig
+Database.Persist.Base.withPool (dbconf :: Settings.PersistConfig) $ \p -> do
+  Database.Persist.Base.runPool dbconf (runMigration migrateAll) p
+  let h = YesodHeroku conf logger s p
+  defaultRunner (f . logWare) h
+  where
+    #ifdef DEVELOPMENT
+       logWare = logStdoutDev
+    #else
+       logWare = logStdout
+    #endif
