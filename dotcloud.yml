@@ -3,12 +3,6 @@
     buildscript: yesodoverflow/dotcloud2
     ports:
       www: http
-    systempackages:
-      - cabal-install
-      - happy
-      - alex
-      - ghc
-      - git
     approot: yesodoverflow
   data:
     type: postgresql
