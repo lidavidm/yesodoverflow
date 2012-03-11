@@ -1,0 +1,341 @@
+@colorbg: #ccc;
+@colorhighlight: #690;
+@colorlink: #09C;
+@colorlinkv: #93c;
+@colorlinkh: #33b5e5;
+@tagfg: #777;
+@tagfgh: #333;
+@widthlcol: 70%;
+@widthrcol: 29.9%;
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 85%;
+}
+
+#container {
+  margin: 0 auto;
+}
+
+#navbar, #main {
+  width: 960px;
+  margin: 0 auto;
+}
+
+a:link {
+  color: #{colorlink};
+  text-decoration: none;
+}
+
+a:visited {
+  color: #{colorlinkv};
+  text-decoration: none;
+}
+
+a:hover {
+  color: #{colorlinkh};
+  text-decoration: none;
+}
+
+a:active {
+  color: #{colorlinkh};
+}
+
+form {
+  label {
+    display: block;
+    margin-bottom: 0.5em;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%;
+    border: 1px solid #{colorbg};
+    padding: 0;
+    margin: 0.5em 0;
+  }
+
+  textarea {
+    min-height: 300px;
+  }
+  
+  input[type="submit"], button {
+    background-color: #{colorbg};
+    padding: 2px 5px;
+    border: 0;
+    height: 2em;
+    line-height: 2em;
+    font-size: 120%;
+  }
+}
+
+.linelayout {
+  float: left;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.llitem {
+  position: relative;
+  float: left;
+  left: 100%;
+}
+
+#container > header {
+  #userbar{
+    background-color: #{colorbg};
+    line-height: 30px;
+    height: 30px;
+    float: left;
+    width: 100%;
+    display: block;
+    position: relative;
+
+    div {
+      position: relative;
+      float: left;
+      left: 100%;
+    }
+
+    div#user {
+      margin-left: -30%;
+      width: 14%;
+      text-align: right;
+    }
+
+    div#search {
+      margin-left: -15%;
+      width: 15%;
+    }
+  }
+  #navbar {
+    border-bottom: 3px solid #{colorbg};
+    
+    #logo {
+      font-size: 3em;
+
+      span {
+        color: #{colorhighlight};
+      }
+    }
+
+    #navlinks {
+      list-style-type: none;
+      float: right;
+      margin: -30px 0 0 0;
+      display: inline-block;
+      
+      li {
+        display: inline-block;
+        margin: 0 0 0 10px;
+        font-size: 1.2em;
+        font-weight: bolder;
+        height: 30px;
+        line-height: 30px;
+
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #{colorlink};
+          border-bottom: 3px solid #{colorbg};
+          text-decoration: none;
+        }
+
+        a:visited {
+          color: #{colorlink};
+          text-decoration: none;
+        }
+
+        a:hover {
+          border-bottom: 3px solid #888;
+        }
+
+        a:active, a.active {
+          border-bottom: 3px solid #888;
+        }
+      }
+
+      li:last-child {
+        margin-left: 40px;
+      }
+    }
+  }
+}
+
+section#questions {
+  width: #{widthlcol};
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  div.question {
+    .summary,.activity {
+      display: inline-block;
+      border-bottom: 2px dotted #{colorbg};
+      padding: 1em 0;
+    }
+
+    .activity {
+      width: 20%;
+      float: left;
+    }
+    
+    .summary {
+      width: 79.9%;
+    }
+
+    .activity {
+      display: inline-block;
+      div {
+        display: inline-block;
+        div {
+          display: block;
+          margin-left: 5px;
+          padding: 0 5px;
+        }
+        div:first-child {
+          font-size: 175%;
+          text-align: center;
+        }
+      }
+    }
+    
+    header {
+      font-size: 175%;
+      clear: none;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    ul {
+      width: 50%;
+      float: left;
+    }
+  }
+}
+
+section#question {
+  width: #{widthlcol};
+
+  div#question-activity, div.answer-activity {
+    float: left;
+    margin: 0 10px;
+    width: 40px;
+    font-size: 200%;
+    color: #{colorbg};
+    font-weight: bold;
+  }
+
+  section#answers {
+    header {
+    }
+  }
+  
+  section#question-body {
+    border-bottom: 2px dotted #{colorbg};
+  }
+  
+  section#question-body, div.answer-body {
+    padding-bottom: 1em;
+    padding-left: 80px;
+  }
+
+  section#question-body,div.answer-body {
+    min-height: 100px;
+  }
+
+  section#reply {
+    border-top: 2px solid #{colorbg};
+  }
+}
+
+footer {
+  margin-top: 150px;
+  clear: both;
+}
+
+section.user {
+  float: right;
+
+  a:visited {
+    color: #{colorlink};
+  }
+}
+
+section.user-box {
+  margin: 0.25em 0;
+  border-top: 1px solid #{colorbg};
+  padding-top: 0.25em;
+  height: 48px;
+  line-height: 24px;
+
+  a:visited {
+    color: #{colorlink};
+  }
+
+  div.time {
+    font-style: italic;
+  }
+
+  img {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin: 0 0.5em 0 0;
+  }
+}
+
+.question-tags {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline;
+    font-style: italic;
+
+    a {
+      color: #{tagfg};
+    }
+  }
+  li:before {
+    content: " ";
+  }
+  li:hover a {
+    color: #{tagfgh};
+  }
+}
+
+.question-tags:before {
+  content: "tags |";
+  color: #{tagfg};
+}
+
+.sprite {background: url(/static/sprites.png) no-repeat top left;}
+div#question-activity,div.answer-activity {
+  button {
+    border: 0;
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+  button,span {
+    display: block;
+    text-align: center;
+  }
+  .downvote {
+    background-position: 0 0;
+    width: 40px;
+    height: 20px;
+  } 
+  .upvote {
+    background-position: 0 -70px;
+    width: 40px;
+    height: 20px;
+  }
+}

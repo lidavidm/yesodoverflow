@@ -1,0 +1,28 @@
+<h1>Questions
+
+#{show page}
+#{show sort}
+
+<section #questions>
+    <ul>
+        $forall qa <- questions
+            $with Entity eid q <- fst qa, u <- snd qa
+                <li>
+                    <div .question>
+                        <div .activity>
+                            <div .votes>
+                                <div>#{(questionUpvotes q) - (questionDownvotes q)}
+                                <div>Votes
+                            <div .answers>
+                                <div>#{length $ questionAnswers q}
+                                <div>Answers
+                        <div .summary>  
+                            <header>
+                                <a href=@{QuestionViewR eid}>#{questionTitle q}
+                            <ul .question-tags>
+                                $forall tag <- questionTags q
+                                    <li>#{tag}
+                            $maybe user <- u    
+                                <section .user>
+                                    <a href=@{UserViewR (questionAsker q)}>
+                                        #{userName user}

@@ -1,0 +1,20 @@
+Default: &defaults
+  database: yesodoverflow.sqlite3
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Test:
+  database: yesodoverflow_test.sqlite3
+  <<: *defaults
+
+Staging:
+  database: yesodoverflow_staging.sqlite3
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: yesodoverflow_production.sqlite3
+  poolsize: 100
+  <<: *defaults

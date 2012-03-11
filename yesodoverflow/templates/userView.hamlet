@@ -1,0 +1,7 @@
+<h1>#{name}
+
+$maybe Entity key value <- mu
+    $if key == userId
+        <dl>
+            <dt>Identity
+            <dd>#{ident}

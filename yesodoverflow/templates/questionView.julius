@@ -1,0 +1,13 @@
+$(document).ready(function(){
+    $('#question-activity button:first').click(function(){
+        $.ajax(
+            $(this).attr('-data-action-url'),
+            {
+                type: 'PUT',
+                success: function(data, textStatus, xhr) {
+                    console.log(data);
+                }
+            }
+        );
+    });
+});
