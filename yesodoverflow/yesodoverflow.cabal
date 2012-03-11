@@ -107,4 +107,3 @@ executable         yesodoverflow
                  , yesod-markdown                >= 0.3.3
                  , time                          >= 1.2
                  , pureMD5                       >= 2.1
-                 , heroku

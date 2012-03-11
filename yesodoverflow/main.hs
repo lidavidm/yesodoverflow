@@ -6,6 +6,4 @@ import Settings             (parseExtra)
 import Application          (getApplication)
 
 main :: IO ()
-main = do
-  durl <- getEnv "DATABASE_URL"
-  defaultMain (fromArgsExtra loadExtra) withYesodHeroku
+main = defaultMain (fromArgs parseExtra) getApplication
