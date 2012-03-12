@@ -5,6 +5,11 @@
       www: http
     systempackages:
       - libpcre3-dev
+      - libpq-dev
+      - zlib1g-dev
+      - libgmp3-dev
+      - libssl-dev
+      - libcrypto++-dev
     approot: yesodoverflow
   data:
     type: postgresql
