@@ -13,7 +13,11 @@ import Model()
 getRootR :: Handler RepHtml
 getRootR = do
   mu <- maybeAuth
+  questions <- runDB $
+               selectList [QuestionTitle !=. ""] [LimitTo 10] >>=
+               mapM (\qe@(Entity _ q) -> do
+                        asker <- get $ questionAsker q
+                        return (qe, asker))
   defaultLayout $ do
-    h2id <- lift newIdent
     setTitle "yesodoverflow homepage"
     $(widgetFile "homepage")

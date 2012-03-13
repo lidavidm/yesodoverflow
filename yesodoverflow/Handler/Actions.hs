@@ -11,13 +11,13 @@ actionErrorMessage NotLoggedIn = "Not logged in."
 actionErrorMessage InvalidUser = "Invalid user."
 actionErrorMessage AlreadyUpvoted = "Already upvoted."
 
-actionFail error = jsonToRepJson $ object [
+actionFail err = jsonToRepJson $ object [
       "succeeded" .= False,
-      "errorMessage" .= actionErrorMessage error
+      "errorMessage" .= actionErrorMessage err
       ]
 
 putQuestionActionR :: Action -> QuestionId -> Handler RepJson
-putQuestionActionR action questionId = do
+putQuestionActionR Upvote questionId = do
   maid <- maybeAuth
   case maid of
     (Just (Entity uid _)) -> do
@@ -33,3 +33,5 @@ putQuestionActionR action questionId = do
             actionFail AlreadyUpvoted
         Nothing -> actionFail InvalidUser
     Nothing -> actionFail NotLoggedIn
+
+putQuestionActionR Downvote _ = undefined

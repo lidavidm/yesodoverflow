@@ -5,7 +5,7 @@ import Yesod.Markdown
 import Model()
 import Handler.Forms
 import qualified Data.Text as T
-import Data.Maybe (maybe, isJust, fromJust)
+import Data.Maybe (isJust, fromJust)
 import Data.Time (getCurrentTime)
 
 type QuestionPair = (QuestionId, Question)
@@ -68,8 +68,8 @@ getQuestionViewR questionId = do
 
 postQuestionViewR :: QuestionId -> Handler RepHtml
 postQuestionViewR questionId = do
-  Entity uid u <- requireAuth
-  ((result, formWidget), enctype) <- runFormPost answerForm
+  Entity uid _ <- requireAuth
+  ((result, _), enctype) <- runFormPost answerForm
   case result of
     FormSuccess (Markdown m) -> do
       time <- liftIO getCurrentTime

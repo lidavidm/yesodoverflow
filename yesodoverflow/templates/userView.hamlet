@@ -1,6 +1,6 @@
 <h1>#{name}
 
-$maybe Entity key value <- mu
+$maybe Entity key _ <- mu
     $if key == userId
         <dl>
             <dt>Identity

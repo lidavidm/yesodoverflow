@@ -114,6 +114,10 @@ form {
     #logo {
       font-size: 3em;
 
+      a {
+        color: #000;
+      }
+
       span {
         color: #{colorhighlight};
       }
@@ -163,8 +167,15 @@ form {
   }
 }
 
+section#questions > header {
+    margin-top: 1em;
+    font-size: x-large;
+    border-bottom: 1px solid #000;
+}
+
 section#questions {
   width: #{widthlcol};
+  
   ul {
     list-style-type: none;
     margin: 0;

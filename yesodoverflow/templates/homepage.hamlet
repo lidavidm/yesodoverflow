@@ -1,2 +1,25 @@
-<h1>_{MsgHello}
-<h2 ##{h2id}>You do not have Javascript enabled.
+<section #questions>
+    <header>
+        <h1>Recent Questions
+    <ul>
+        $forall qa <- questions
+            $with Entity eid q <- fst qa, maybeUser <- snd qa
+                <li>
+                    <div .question>
+                        <div .activity>
+                            <div .votes>
+                                <div>#{(questionUpvotes q) - (questionDownvotes q)}
+                                <div>Votes
+                            <div .answers>
+                                <div>#{length $ questionAnswers q}
+                                <div>Answers
+                        <div .summary>  
+                            <header>
+                                <a href=@{QuestionViewR eid}>#{questionTitle q}
+                            <ul .question-tags>
+                                $forall tag <- questionTags q
+                                    <li>#{tag}
+                            $maybe user <- maybeUser 
+                                <section .user>
+                                    <a href=@{UserViewR (questionAsker q)}>
+                                        #{userName user}

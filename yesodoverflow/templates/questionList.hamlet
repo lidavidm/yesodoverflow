@@ -1,12 +1,12 @@
-<h1>Questions
-
 #{show page}
 #{show sort}
 
 <section #questions>
+    <header>
+        <h1>Questions
     <ul>
         $forall qa <- questions
-            $with Entity eid q <- fst qa, u <- snd qa
+            $with Entity eid q <- fst qa, maybeUser <- snd qa
                 <li>
                     <div .question>
                         <div .activity>
@@ -22,7 +22,7 @@
                             <ul .question-tags>
                                 $forall tag <- questionTags q
                                     <li>#{tag}
-                            $maybe user <- u    
+                            $maybe user <- maybeUser 
                                 <section .user>
                                     <a href=@{UserViewR (questionAsker q)}>
                                         #{userName user}

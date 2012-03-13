@@ -37,7 +37,8 @@
                         Search
                 <div #navbar>
                     <div id="logo">
-                        yesod<span>overflow</span>
+                        <a href=@{RootR}>
+                            yesod<span>overflow</span>
                     <ul #navlinks>
                         <li>
                             <a href=@{QuestionListR}>questions

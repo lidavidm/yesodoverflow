@@ -1,4 +1,4 @@
-$with Question title _ tags _ asker upvotes downvotes asked _<- question    
+$with Question _ _ _ _ asker upvotes downvotes asked _<- question    
     <section #question>
 
         <h1>#{title}
@@ -29,7 +29,7 @@ $with Question title _ tags _ asker upvotes downvotes asked _<- question
                     <h2>
                         Answers: #{length answers}
                 $forall (answer, answerer) <- answers
-                    $with Answer body aId aUp aDown answered _ <- answer
+                    $with Answer aBody aId aUp aDown answered _ <- answer
                         <div .answer>
                             <div .answer-activity>  
                                 <button>
@@ -40,14 +40,19 @@ $with Question title _ tags _ asker upvotes downvotes asked _<- question
                                     <div .downvote.sprite>
                             
                             <div .answer-body>
-                                #{markdownToHtml $ Markdown $ T.unpack body}
+                                #{markdownToHtml $ Markdown $ T.unpack aBody}
                                 <div .answer-user>
                                     ^{fullUserWidget answerer aId $ timeWidget answered}
         
 
         <section #reply>
-            <header>
-                <h2>Your Answer
-            <form method=post action=@{QuestionViewR questionId} enctype=#{enctype}>
-                ^{formWidget}
-                <input type=submit>
+            $maybe _ <- mu 
+                <header>
+                    <h2>Your Answer
+                <form method=post action=@{QuestionViewR questionId} enctype=#{enctype}>
+                    ^{formWidget}
+                    <input type=submit>
+            $nothing
+                <header>
+                    <h2>
+                        <a href=@{AuthR LoginR}>Log in to answer

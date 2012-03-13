@@ -48,6 +48,7 @@ getUser userId = do
     Nothing -> return $ DefaultUser
                "<deleted user>" "<deleted user>" 0 (Activity [] undefined)
 
+getGravatar :: Text -> [Char]
 getGravatar email = concat [
   "http://www.gravatar.com/avatar/",
   show $ md5 $ B.pack $ T.unpack $ T.strip $ T.toLower $ email,
