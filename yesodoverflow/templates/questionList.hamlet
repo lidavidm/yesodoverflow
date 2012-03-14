@@ -2,8 +2,7 @@
 #{show sort}
 
 <section #questions>
-    <header>
-        <h1>Questions
+    <h1>Questions
     <ul>
         $forall qa <- questions
             $with Entity eid q <- fst qa, maybeUser <- snd qa
@@ -17,11 +16,12 @@
                                 <div>#{length $ questionAnswers q}
                                 <div>Answers
                         <div .summary>  
-                            <header>
+                            <h1>
                                 <a href=@{QuestionViewR eid}>#{questionTitle q}
                             <ul .question-tags>
                                 $forall tag <- questionTags q
-                                    <li>#{tag}
+                                    <li>
+                                        <a>#{tag}
                             $maybe user <- maybeUser 
                                 <section .user>
                                     <a href=@{UserViewR (questionAsker q)}>

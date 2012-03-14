@@ -28,11 +28,11 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
                 <header>
                     <h2>
                         Answers: #{length answers}
-                $forall (answer, answerer) <- answers
+                $forall (answerId, answer, answerer) <- answers
                     $with Answer aBody aId aUp aDown answered _ <- answer
                         <div .answer>
                             <div .answer-activity>  
-                                <button>
+                                <button -data-action-url="@{AnswerActionR Upvote answerId}">
                                     <div .upvote.sprite>
                                 <span .votes>
                                     #{aUp - aDown}
@@ -55,4 +55,4 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
             $nothing
                 <header>
                     <h2>
-                        <a>Log in to answer
+                        <a href=@{AuthR LoginR}>Log in to answer

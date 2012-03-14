@@ -37,7 +37,8 @@ getQuestionListR = do
   let page = maybe 0 id pageM
       sort = "sort"
   questions <- runDB $
-               selectList [QuestionTitle !=. ""] [LimitTo 10] >>=
+               selectList [QuestionTitle !=. ""] [LimitTo 10,
+                                                  Desc QuestionAsked] >>=
                mapM (\qe@(Entity _ q) -> do
                         asker <- get $ questionAsker q
                         return (qe, asker))
@@ -50,12 +51,12 @@ getQuestionViewR questionId = do
   mu <- maybeAuth
   (question@(Question title body tags _ _ _ _ _ _), answers, askerU) <- runDB $ do
     question@(Question _ _ _ aIds askerI _ _ _ _) <- get404 questionId
-    answers <- mapM get aIds
+    answers <- liftM (zipWith (,) aIds) $ mapM get aIds
     asker <- getUser askerI
-    let answersJust = map fromJust $ filter isJust answers
-        answerers' = map (\(Answer _ a _ _ _ _) -> a) answersJust
+    let answersJust = map (\(uId, ma) -> (uId, fromJust ma)) $ filter (isJust . snd) answers
+        answerers' = map (\(_, (Answer _ a _ _ _ _)) -> a) answersJust
     answerers <- mapM getUser answerers'
-    let answers' = zip answersJust answerers
+    let answers' = zipWith (\(a,b) c -> (a, b, c)) answersJust answerers
     return (question, answers', asker)
   ((_, formWidget), enctype) <- generateFormPost answerForm
   let qbody = markdownToHtml $ Markdown $ T.unpack body
@@ -69,7 +70,7 @@ getQuestionViewR questionId = do
 postQuestionViewR :: QuestionId -> Handler RepHtml
 postQuestionViewR questionId = do
   Entity uid _ <- requireAuth
-  ((result, _), enctype) <- runFormPost answerForm
+  ((result, _), _) <- runFormPost answerForm
   case result of
     FormSuccess (Markdown m) -> do
       time <- liftIO getCurrentTime

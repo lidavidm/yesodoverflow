@@ -43,10 +43,10 @@ getUser userId = do
   case u of
     Just (User ident name rep _) -> do
       activity <- getBy $ UniqueUserActivity userId
-      let activity' = maybe (Activity [] undefined) entityVal activity
+      let activity' = maybe (Activity [] [] undefined) entityVal activity
       return $ DefaultUser ident name rep activity'
     Nothing -> return $ DefaultUser
-               "<deleted user>" "<deleted user>" 0 (Activity [] undefined)
+               "<deleted user>" "<deleted user>" 0 (Activity [] [] undefined)
 
 getGravatar :: Text -> [Char]
 getGravatar email = concat [

@@ -10,4 +10,18 @@ $(document).ready(function(){
             }
         );
     });
+    $("section#answers .answer-activity button:first").each(function(){
+        var url = $(this).attr('-data-action-url');
+        $(this).click(function(){
+            $.ajax(
+                url,
+                {
+                    type: 'PUT',
+                    success: function(data, textStatus, xhr) {
+                        console.log(data);
+                    }
+                }
+            );
+        });
+    });
 });

@@ -9,7 +9,7 @@ import Data.Time (getCurrentTime)
 
 getAskR :: Handler RepHtml
 getAskR = do
-  Entity uid u <- requireAuth
+  _ <- requireAuth
   ((_, formWidget), enctype) <- generateFormPost askForm
   defaultLayout $ do
     setTitle "Ask Question"

@@ -27,7 +27,8 @@ Answer
     asked UTCTime
     edited [UTCTime] Maybe
 Activity
-    upvoted [QuestionId]
+    upvotedQuestions [QuestionId]
+    upvotedAnswers [AnswerId]
     userid UserId
     UniqueUserActivity userid
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)

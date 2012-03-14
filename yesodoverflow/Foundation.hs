@@ -164,7 +164,7 @@ instance YesodAuth Overflow where
               unique <- lift $ lift $ lift newUnique
               let username = pack $ "user" ++ (show $ hashUnique unique)
               userId <- insert $ User (credsIdent creds) username 1 Nothing
-              _ <- insert $ Activity [] userId
+              _ <- insert $ Activity [] [] userId
               return $ Just userId
 
     -- You can add other plugins like BrowserID, email or OAuth here

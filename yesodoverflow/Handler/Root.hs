@@ -14,7 +14,8 @@ getRootR :: Handler RepHtml
 getRootR = do
   mu <- maybeAuth
   questions <- runDB $
-               selectList [QuestionTitle !=. ""] [LimitTo 10] >>=
+               selectList [QuestionTitle !=. ""] [LimitTo 10,
+                                                  Desc QuestionAsked] >>=
                mapM (\qe@(Entity _ q) -> do
                         asker <- get $ questionAsker q
                         return (qe, asker))

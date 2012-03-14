@@ -214,9 +214,11 @@ section#questions {
       }
     }
     
-    header {
+    h1 {
       font-size: 175%;
       clear: none;
+      margin: 0;
+      padding: 0;
 
       overflow: hidden;
       text-overflow: ellipsis;
@@ -305,6 +307,9 @@ section.user-box {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   li {
     display: inline;
@@ -313,9 +318,17 @@ section.user-box {
     a {
       color: #{tagfg};
     }
+    a:after {
+      content: ",";
+    }
   }
   li:before {
     content: " ";
+  }
+  li:last-child {
+    a:after {
+      content: "";
+    }
   }
   li:hover a {
     color: #{tagfgh};

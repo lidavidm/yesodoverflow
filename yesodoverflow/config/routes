@@ -16,3 +16,4 @@
 /user/#UserId UserViewR GET
 
 /action/#Action/question/#QuestionId QuestionActionR PUT
+/action/#Action/answer/#AnswerId AnswerActionR PUT
