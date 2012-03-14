@@ -4,7 +4,7 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
         <h1>#{title}
     
         <div #question-activity>
-            <button -data-action-url="@{QuestionActionR Upvote questionId}">
+            <button -data-upvote-url="@{QuestionActionR Upvote questionId}">
                 <div .upvote.sprite>
             <span .votes>
                 #{upvotes - downvotes}
@@ -32,7 +32,7 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
                     $with Answer aBody aId aUp aDown answered _ <- answer
                         <div .answer>
                             <div .answer-activity>  
-                                <button -data-action-url="@{AnswerActionR Upvote answerId}">
+                                <button -data-upvote-url="@{AnswerActionR Upvote answerId}" -data-votes-url="@{AnswerQueryR QueryVotes answerId}">
                                     <div .upvote.sprite>
                                 <span .votes>
                                     #{aUp - aDown}

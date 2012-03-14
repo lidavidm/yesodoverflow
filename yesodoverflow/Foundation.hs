@@ -11,6 +11,7 @@ module Foundation
     , module Settings
     , module Model
     , Action (..)
+    , Query (..)
     ) where
 
 import Prelude
@@ -81,7 +82,14 @@ mkMessage "Overflow" "messages" "en"
 -- split these actions into two functions and place them in separate files.
 
 data Action = Upvote | Downvote deriving (Show, Read, Eq)
+data Query = QueryVotes deriving (Show, Read, Eq)
 instance PathPiece Action where
+  toPathPiece = pack . show
+  fromPathPiece s =
+    case reads $ unpack s of
+      (i, _):_ -> Just i
+      [] -> Nothing
+instance PathPiece Query where
   toPathPiece = pack . show
   fromPathPiece s =
     case reads $ unpack s of

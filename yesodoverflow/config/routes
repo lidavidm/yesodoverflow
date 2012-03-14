@@ -17,3 +17,6 @@
 
 /action/#Action/question/#QuestionId QuestionActionR PUT
 /action/#Action/answer/#AnswerId AnswerActionR PUT
+    
+/query/#Query/question/#QuestionId QuestionQueryR GET
+/query/#Query/answer/#AnswerId AnswerQueryR GET

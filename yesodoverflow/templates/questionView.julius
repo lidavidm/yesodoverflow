@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#question-activity button:first').click(function(){
         $.ajax(
-            $(this).attr('-data-action-url'),
+            $(this).attr('-data-upvote-url'),
             {
                 type: 'PUT',
                 success: function(data, textStatus, xhr) {
@@ -11,17 +11,31 @@ $(document).ready(function(){
         );
     });
     $("section#answers .answer-activity button:first").each(function(){
-        var url = $(this).attr('-data-action-url');
+        var upvoteUrl = $(this).attr('-data-upvote-url');
         $(this).click(function(){
             $.ajax(
-                url,
+                upvoteUrl,
                 {
                     type: 'PUT',
                     success: function(data, textStatus, xhr) {
-                        console.log(data);
+                        checkUpvotes();
                     }
                 }
             );
         });
     });
+    checkUpvotes();
 });
+
+function checkUpvotes() {
+    $('section#answers .answer-activity button:first').each(function(){
+        var votesArea = $(this).next('span.votes');
+        var upvoteButton = $(this);
+        $.getJSON($(this).attr('-data-votes-url'), function(data){
+            votesArea.html(data['votes']);
+            if (data['upvoted']) {
+                upvoteButton.addClass('upvoted');
+            }
+        });
+    });
+}
