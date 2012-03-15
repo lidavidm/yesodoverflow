@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#question-activity button:first').click(function(){
         $.ajax(
-            $(this).attr('-data-upvote-url'),
+            $(this).data('upvoteUrl'),
             {
                 type: 'PUT',
                 success: function(data, textStatus, xhr) {
@@ -11,7 +11,7 @@ $(document).ready(function(){
         );
     });
     $("section#answers .answer-activity button:first").each(function(){
-        var upvoteUrl = $(this).attr('-data-upvote-url');
+        var upvoteUrl = $(this).data('upvoteUrl');
         $(this).click(function(){
             $.ajax(
                 upvoteUrl,
@@ -31,7 +31,7 @@ function checkUpvotes() {
     $('section#answers .answer-activity button:first').each(function(){
         var votesArea = $(this).next('span.votes');
         var upvoteButton = $(this);
-        $.getJSON($(this).attr('-data-votes-url'), function(data){
+        $.getJSON($(this).data('votesUrl'), function(data){
             votesArea.html(data['votes']);
             if (data['upvoted']) {
                 upvoteButton.addClass('upvoted');
