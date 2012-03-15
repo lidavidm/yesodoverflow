@@ -31,7 +31,8 @@ function checkUpvotes() {
     $('section#answers .answer-activity button:first').each(function(){
         var votesArea = $(this).next('span.votes');
         var upvoteButton = $(this);
-        $.getJSON($(this).data('votesUrl'), function(data){
+        $.getJSON($(this).data('getVotesUrl'), function(data){
+            console.log(data);
             votesArea.html(data['votes']);
             if (data['upvoted']) {
                 upvoteButton.addClass('upvoted');

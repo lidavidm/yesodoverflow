@@ -363,6 +363,6 @@ div#question-activity,div.answer-activity {
     height: 20px;
   }
   .upvoted .upvote {
-    background-color: orange;
+    background-color: #0F0;
   }
 }
