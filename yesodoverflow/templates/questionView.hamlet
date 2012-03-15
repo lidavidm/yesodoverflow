@@ -55,4 +55,4 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
             $nothing
                 <header>
                     <h2>
-                        <a href=@{AuthR LoginR}>Log in to answer
+                        <a>Log in to answer
