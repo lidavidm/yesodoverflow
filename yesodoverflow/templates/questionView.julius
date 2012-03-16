@@ -35,7 +35,7 @@ function checkUpvotes() {
             console.log(data);
             votesArea.html(data['votes']);
             if (data['upvoted']) {
-                upvoteButton.addClass('upvoted');
+                upvoteButton.addClass('voted');
             }
         });
     });

@@ -5,11 +5,11 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
     
         <div #question-activity .span-2>
             <button data-upvote-url="@{QuestionActionR Upvote questionId}">
-                <div .upvote.sprite>
+                <img .upvote alt="Upvote question" title="Upvote question" src="/static/upvote.png">
             <span .votes>
                 #{upvotes - downvotes}
             <button>
-                <div .downvote.sprite>
+                <img .downvote alt="Downvote question" title="Downvote question" src="/static/downvote.png">
 
         <div #question-body .span-14 .last>
             #{qbody}
@@ -17,38 +17,38 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
                 $forall tag <- tags
                     <li .small><a title=#{tag}>#{tag}</a>
             ^{fullUserWidget askerU asker (timeWidget asked)}
-                    
+ 
 
-        <section #answers>
+        <section #answers .span-16 .last>
             $if null answers
                 <h2>
-                    No answers here. Post your own!
+                No answers here. Post your own!
             $else
                 <h2>
                     Answers: #{length answers}
                 $forall (answerId, answer, answerer) <- answers
                     $with Answer aBody aId aUp aDown answered _ <- answer
                         <div .answer>
-                            <div .answer-activity .span-2>  
+                            <div .answer-activity .span-2>
                                 <button data-upvote-url="@{AnswerActionR Upvote answerId}" data-get-votes-url="@{AnswerQueryR QueryVotes answerId}">
-                                    <div .upvote.sprite>
+                                    <img .upvote alt="Upvote question" title="Upvote question" src="/static/upvote.png">
                                 <span .votes>
                                     #{aUp - aDown}
                                 <button>
-                                    <div .downvote.sprite>
-                            
+                                    <img .downvote alt="Downvote question" title="Downvote question" src="/static/downvote.png">
+
                             <div .answer-body .span-14 .last>
                                 #{markdownToHtml $ Markdown $ T.unpack aBody}
                                 <div .answer-user>
                                     ^{fullUserWidget answerer aId $ timeWidget answered}
-        
 
-        <div #reply>
-            $maybe _ <- mu
-                <h2>Your Answer
-                <form method=post action=@{QuestionViewR questionId} enctype=#{enctype}>
-                    ^{formWidget}
-                    <input type=submit>
-            $nothing
-                <h2>
-                    <a>Log in to answer
+
+    <div #reply .span-16 .last>
+        $maybe _ <- mu
+            <h2>Your Answer
+            <form method=post action=@{QuestionViewR questionId} enctype=#{enctype}>
+                ^{formWidget}
+                <input type=submit>
+        $nothing
+            <h2>
+                <a>Log in to answer
