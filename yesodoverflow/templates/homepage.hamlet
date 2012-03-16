@@ -1,25 +1,27 @@
-<section #questions>
+<div #questions>
     <h1>Recent Questions
     <ul>
         $forall qa <- questions
             $with Entity eid q <- fst qa, maybeUser <- snd qa
                 <li>
                     <div .question>
-                        <div .activity>
-                            <div .votes>
+                        <div .activity .span-4>
+                            <div .votes .span-2>
                                 <div>#{(questionUpvotes q) - (questionDownvotes q)}
                                 <div>Votes
-                            <div .answers>
+                            <div .answers .span-2 .last>
                                 <div>#{length $ questionAnswers q}
                                 <div>Answers
-                        <div .summary>  
-                            <h1>
+                        <div .summary .span-12 .last>  
+                            <h2>
                                 <a href=@{QuestionViewR eid}>#{questionTitle q}
-                            <ul .question-tags>
+                            <ul .question-tags .span-9>
                                 $forall tag <- questionTags q
-                                    <li>
-                                        <a>#{tag}
+                                    <li .small>
+                                        <a title=#{tag}>#{tag}
                             $maybe user <- maybeUser 
-                                <section .user>
+                                <div .user .span-3 .last .small>
                                     <a href=@{UserViewR (questionAsker q)}>
                                         #{userName user}
+                                    <p>
+                                        #{userReputation user}

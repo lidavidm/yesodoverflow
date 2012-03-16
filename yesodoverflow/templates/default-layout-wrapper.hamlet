@@ -14,6 +14,11 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+
+        <link rel="stylesheet" href="/static/css/blueprint/print.css" type="text/css" media="print"> 
+
+        <!--[if lt IE 8]><link rel="stylesheet" href="/static/css/blueprint/ie.css" type="text/css" media="screen, projection"> <![endif]-->`
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
     
         ^{pageHead pc}
@@ -25,32 +30,36 @@
         <script>
           document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
     <body>
-        <div id="container">
-            <header>
-                <div #userbar>
-                    <div id="user">
+        <div #container .container>
+            <header .span-24>
+                <div #userbar .span-24>
+                    <div id="user" .span-20>
                         $maybe aid <- mu
                             <a href=@{AuthR LogoutR}>Logout
                         $nothing
                             <a href=@{AuthR LoginR}>Login
-                    <div id="search">
+                    <div id="search" .span-4 .last>
                         Search
-                <div #navbar>
-                    <div id="logo">
+                <div #navbar .span-24>
+                    <div id="logo" .span-10>
                         <a href=@{RootR}>
-                            yesod<span>overflow</span>
-                    <ul #navlinks>
-                        <li>
-                            <a href=@{QuestionListR}>questions
-                        <li>
-                            <a>tags
-                        <li>
-                            <a>users
-                        <li>
-                            <a href=@{AskR}>ask question
-            <div id="main" role="main">
-                ^{pageBody pc}
-            <footer>
+                            YesodOverflow
+                    <nav  #navlinks .span-14 .last> 
+                        <ul>
+                            <li>
+                                <a href=@{QuestionListR}>questions
+                            <li>
+                                <a>tags
+                            <li>
+                                <a>users
+                            <li>
+                                <a href=@{AskR}>ask question
+            <div id="main" role="main" .span-24>
+                <div .span-16>
+                    ^{pageBody pc}
+                <div .span-7 .last .prepend-1 #sidebar>
+                    Sidebar
+            <footer .span-24 .small>
                 #{extraCopyright $ appExtra $ settings master}
         \<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.  chromium.org/developers/how-tos/chrome-frame-getting-started -->
         \<!--[if lt IE 7 ]>

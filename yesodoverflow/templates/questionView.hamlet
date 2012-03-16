@@ -1,9 +1,9 @@
 $with Question _ _ _ _ asker upvotes downvotes asked _<- question    
-    <section #question>
+    <article #question>
 
         <h1>#{title}
     
-        <div #question-activity>
+        <div #question-activity .span-2>
             <button data-upvote-url="@{QuestionActionR Upvote questionId}">
                 <div .upvote.sprite>
             <span .votes>
@@ -11,27 +11,25 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
             <button>
                 <div .downvote.sprite>
 
-        <section #question-body>
+        <div #question-body .span-14 .last>
             #{qbody}
             <ul .question-tags>
                 $forall tag <- tags
-                    <li><a>#{tag}</a>
+                    <li .small><a title=#{tag}>#{tag}</a>
             ^{fullUserWidget askerU asker (timeWidget asked)}
                     
 
         <section #answers>
             $if null answers
-                <header>
-                    <h2>
-                        No answers here. Post your own!
+                <h2>
+                    No answers here. Post your own!
             $else
-                <header>
-                    <h2>
-                        Answers: #{length answers}
+                <h2>
+                    Answers: #{length answers}
                 $forall (answerId, answer, answerer) <- answers
                     $with Answer aBody aId aUp aDown answered _ <- answer
                         <div .answer>
-                            <div .answer-activity>  
+                            <div .answer-activity .span-2>  
                                 <button data-upvote-url="@{AnswerActionR Upvote answerId}" data-get-votes-url="@{AnswerQueryR QueryVotes answerId}">
                                     <div .upvote.sprite>
                                 <span .votes>
@@ -39,20 +37,18 @@ $with Question _ _ _ _ asker upvotes downvotes asked _<- question
                                 <button>
                                     <div .downvote.sprite>
                             
-                            <div .answer-body>
+                            <div .answer-body .span-14 .last>
                                 #{markdownToHtml $ Markdown $ T.unpack aBody}
                                 <div .answer-user>
                                     ^{fullUserWidget answerer aId $ timeWidget answered}
         
 
-        <section #reply>
-            $maybe _ <- mu 
-                <header>
-                    <h2>Your Answer
+        <div #reply>
+            $maybe _ <- mu
+                <h2>Your Answer
                 <form method=post action=@{QuestionViewR questionId} enctype=#{enctype}>
                     ^{formWidget}
                     <input type=submit>
             $nothing
-                <header>
-                    <h2>
-                        <a>Log in to answer
+                <h2>
+                    <a>Log in to answer

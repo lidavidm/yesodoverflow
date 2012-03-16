@@ -23,11 +23,15 @@ timeWidget asked = do
 fullUserWidget :: DefaultUser -> UserId -> Widget -> Widget
 fullUserWidget user userId widget = do
   toWidget [whamlet|
-            <section .user-box>
-                <img src=#{getGravatar $ defaultUserIdent user} alt=#{defaultUserName user}>
-                ^{widget}
-                <a href=@{UserViewR userId}>
-                    #{defaultUserName user}|]
+            <div .user-box>
+                <img .span-3 src=#{getGravatar $ defaultUserIdent user} alt=#{defaultUserName user}>
+                <div .span-11 .last>
+                    ^{widget}
+                    <a href=@{UserViewR userId}>
+                        #{defaultUserName user}
+                    <p>
+                        #{defaultUserReputation user}
+                   |]
 
 getQuestionListR :: Handler RepHtml
 getQuestionListR = do
